@@ -41,7 +41,7 @@ public class MainController extends HttpServlet {
             String txtB = request.getParameter("txtB");
             double a = Double.parseDouble(txtA);
             double b = Double.parseDouble(txtB);
-            out.println(a + "+" + b +"= <b>" + (a+b)+"</b>");
+            out.println(a + "+" + b + "= <b>" + (a+b) + "</b>");
             out.println("</body>");
             out.println("</html>");
         }
