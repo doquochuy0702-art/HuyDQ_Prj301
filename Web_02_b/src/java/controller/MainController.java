@@ -47,8 +47,8 @@ public class MainController extends HttpServlet {
             double b =0;
             double result = 0;
             try {
-                a = Double.parseDouble(txtB);
-                b = Double.parseDouble(txtA);
+                a = Double.parseDouble(txtA);
+                b = Double.parseDouble(txtB);
                 switch (txtOp) {
                     case "+":
                         result = a+b;
