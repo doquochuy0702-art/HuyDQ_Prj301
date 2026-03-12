@@ -28,9 +28,7 @@
 
         <jsp:include page="welcome.jsp" />
 
-        <c:if test="${empty user}">
-            <c:redirect url="login.jsp"/>
-        </c:if>
+        
 
         <c:if test="${not empty user}">
 

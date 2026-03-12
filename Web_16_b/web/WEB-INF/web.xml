@@ -4,9 +4,21 @@
         <filter-name>AuthenFilter</filter-name>
         <filter-class>controller.AuthenFilter</filter-class>
     </filter>
+    <filter>
+        <filter-name>AdminFilter</filter-name>
+        <filter-class>controller.AdminFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <servlet-name>UniversityController</servlet-name>
+    </filter-mapping>
     <filter-mapping>
         <filter-name>AuthenFilter</filter-name>
         <url-pattern>/welcome.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AuthenFilter</filter-name>
+        <url-pattern>/search.jsp</url-pattern>
     </filter-mapping>
     <filter-mapping>
         <filter-name>AuthenFilter</filter-name>

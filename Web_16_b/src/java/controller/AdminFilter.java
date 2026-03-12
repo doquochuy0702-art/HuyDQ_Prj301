@@ -14,16 +14,16 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.UserDTO;
 
 /**
  *
  * @author LENOVO
  */
-public class AuthenFilter implements Filter {
+public class AdminFilter implements Filter {
     
     private static final boolean debug = true;
 
@@ -32,19 +32,24 @@ public class AuthenFilter implements Filter {
     // configured. 
     private FilterConfig filterConfig = null;
     
-    public AuthenFilter() {
+    public AdminFilter() {
     }    
     
     private void doBeforeProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
         if (debug) {
-            log("AuthenFilter:DoBeforeProcessing");
+            log("AdminFilter:DoBeforeProcessing");
         }
-        
-        HttpServletRequest  httpRequest = (HttpServletRequest)request;
+    HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpSession session = httpRequest.getSession();
-        if(session.getAttribute("user")==null){
-            HttpServletResponse httpResponse = (HttpServletResponse)response;
+        if (session.getAttribute("user") != null) {
+            UserDTO u = (UserDTO) session.getAttribute("user");
+            if (u.getRoleID() != "QL") {
+                HttpServletResponse httpResponse = (HttpServletResponse) response;
+                httpResponse.sendRedirect("e403.jsp");
+            }
+        } else {
+            HttpServletResponse httpResponse = (HttpServletResponse) response;
             httpResponse.sendRedirect("login.jsp");
         }
         // Write code here to process the request and/or response before
@@ -72,7 +77,7 @@ public class AuthenFilter implements Filter {
     private void doAfterProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
         if (debug) {
-            log("AuthenFilter:DoAfterProcessing");
+            log("AdminFilter:DoAfterProcessing");
         }
 
         // Write code here to process the request and/or response after
@@ -108,7 +113,7 @@ public class AuthenFilter implements Filter {
             throws IOException, ServletException {
         
         if (debug) {
-            log("AuthenFilter:doFilter()");
+            log("AdminFilter:doFilter()");
         }
         
         doBeforeProcessing(request, response);
@@ -168,7 +173,7 @@ public class AuthenFilter implements Filter {
         this.filterConfig = filterConfig;
         if (filterConfig != null) {
             if (debug) {                
-                log("AuthenFilter:Initializing filter");
+                log("AdminFilter:Initializing filter");
             }
         }
     }
@@ -179,9 +184,9 @@ public class AuthenFilter implements Filter {
     @Override
     public String toString() {
         if (filterConfig == null) {
-            return ("AuthenFilter()");
+            return ("AdminFilter()");
         }
-        StringBuffer sb = new StringBuffer("AuthenFilter(");
+        StringBuffer sb = new StringBuffer("AdminFilter(");
         sb.append(filterConfig);
         sb.append(")");
         return (sb.toString());
