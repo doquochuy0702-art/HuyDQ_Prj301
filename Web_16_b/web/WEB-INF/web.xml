@@ -21,6 +21,10 @@
         <url-pattern>/search.jsp</url-pattern>
     </filter-mapping>
     <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <url-pattern>/university-form.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
         <filter-name>AuthenFilter</filter-name>
         <servlet-name>UniversityController</servlet-name>
     </filter-mapping>
